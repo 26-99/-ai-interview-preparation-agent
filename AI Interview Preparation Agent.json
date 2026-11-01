@@ -1,0 +1,92 @@
+{
+  "name": "AI Interview Preparation Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "feae1160-0af9-4f17-a7b3-41fc7887a6c4",
+      "name": "When chat message received",
+      "webhookId": "5f1ba64b-e481-4341-81c9-b7e4f60c6e98"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are an AI Interview Preparation Agent for students and fresh graduates.\n\nYour goal is to help users prepare for technical interviews based on their job role, experience level, and technical skills.\n\nWhen a user provides their details:\n1. Generate 5 relevant technical interview questions.\n2. Provide clear, beginner-friendly sample answers.\n3. Recommend 3 important topics to revise.\n4. Create a practical 3-day study plan.\n5. Give tips for answering interview questions confidently.\n\nIf the user has not mentioned a job role, ask them to provide one.\n\nUse clear headings and numbered lists. Keep explanations accurate and suitable for fresh graduates."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "f6ba2d05-9271-4d40-81de-4b223a2e0991",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        160
+      ],
+      "id": "b9dcd1b5-a9ca-4333-83c3-12f727b2d4e9",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "78a5ba74-6e5b-4299-8d6a-910aa8c81d04",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "da8e5bbf47a4b4d16471e839618c12a1772deeb7708f963099555ae5d00e9dc4"
+  },
+  "nodeGroups": [],
+  "id": "WKnQV68Bgc0DQ0VU",
+  "tags": []
+}
